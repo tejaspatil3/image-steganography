@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #4b0014;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.container {
+    background: white;
+    color: black;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+textarea, input[type="file"], input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #600020;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #800030;
+}

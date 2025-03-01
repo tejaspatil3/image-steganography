@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Hidden Message - Steganography</title>
+    <style>
+        body {
+            background-color: #4d0026;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        button {
+            background-color: #4d0026;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #660033;
+        }
+    </style>
+</head>
+<body>
+    <h1>View Hidden Message</h1>
+    <div class="container">
+        <label for="fileInput">Upload an image (jpg/png):</label>
+        <input type="file" id="fileInput" accept="image/png, image/jpeg">
+        <br>
+        <button onclick="extractMessage()">Extract Message</button>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        function extractMessage() {
+            let fileInput = document.getElementById('fileInput').files[0];
+            if (!fileInput) {
+                alert("Please upload an image file.");
+                return;
+            }
+            let formData = new FormData();
+            formData.append("file", fileInput);
+            fetch("/stego/extract/image", { method: "POST", body: formData })
+                .then(response => response.text())
+                .then(data => document.getElementById("output").innerText = "Hidden Message: " + data)
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

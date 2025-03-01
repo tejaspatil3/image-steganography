@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Image Steganography</h1>
+    
+    <div class="container">
+        <h2>Encrypt Message</h2>
+        <form action="/encrypt" method="POST" enctype="multipart/form-data">
+            <label for="image">Choose Image:</label>
+            <input type="file" name="image" accept="image/png, image/jpeg" required>
+
+            <label for="message">Enter Secret Message:</label>
+            <textarea name="message" required></textarea>
+
+            <label for="password">Enter 5-Character Alphanumeric Password:</label>
+            <input type="text" name="password" pattern="[A-Za-z0-9]{5}" required>
+
+            <button type="submit">Encrypt</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Decrypt Message</h2>
+        <form action="/decrypt" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload Encrypted Image:</label>
+            <input type="file" name="image" accept="image/png, image/jpeg" required>
+
+            <label for="password">Enter Password:</label>
+            <input type="text" name="password" required>
+
+            <button type="submit">Decrypt</button>
+        </form>
+    </div>
+</body>
+</html>

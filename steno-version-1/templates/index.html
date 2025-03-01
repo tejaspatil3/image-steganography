@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Steganography</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <h1>Image Steganography</h1>
+
+    <!-- Flash Messages for Feedback -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        <h2>Encrypt a Message</h2>
+        <form action="/encrypt" method="POST" enctype="multipart/form-data">
+            <label>Choose an Image:</label>
+            <input type="file" name="image" required>
+
+            <label>Enter Secret Message:</label>
+            <textarea name="message" required></textarea>
+
+            <label>Enter 5-Character Password (Alphanumeric):</label>
+            <input type="text" name="password" pattern="[a-zA-Z0-9]{5}" title="Exactly 5 alphanumeric characters" required>
+
+            <button type="submit">Encrypt</button>
+        </form>
+
+        <!-- Show encrypted image if available -->
+        {% if encrypted_image %}
+            <h3>Encrypted Image:</h3>
+            <img src="{{ encrypted_image }}" width="300px" alt="Encrypted Image">
+            <p>Right-click and save the image for decryption.</p>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <h2>Decrypt a Message</h2>
+        <form action="/decrypt" method="POST" enctype="multipart/form-data">
+            <label>Choose Encrypted Image:</label>
+            <input type="file" name="image" required>
+
+            <label>Enter 5-Character Password:</label>
+            <input type="text" name="password" pattern="[a-zA-Z0-9]{5}" title="Exactly 5 alphanumeric characters" required>
+
+            <label>Enter Approximate Message Length:</label>
+            <input type="number" name="message_length" required>
+
+            <button type="submit">Decrypt</button>
+        </form>
+    </div>
+
+</body>
+</html>

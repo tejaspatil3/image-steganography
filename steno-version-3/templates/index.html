@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Image Steganography</h1>
+
+    <div class="container">
+        <h2>Encrypt Message</h2>
+        <form action="/encrypt" method="POST" enctype="multipart/form-data" onsubmit="return validateEncryptForm()">
+            <label>Choose Image:</label>
+            <input type="file" name="image" id="encryptImage" accept="image/png, image/jpeg" required>
+
+            <label>Enter Secret Message:</label>
+            <textarea name="message" required></textarea>
+
+            <label>Enter 5-Character Alphanumeric Password:</label>
+            <input type="text" name="password" id="encryptPassword" pattern="[A-Za-z0-9]{5}" required>
+
+            <button type="submit">Encrypt</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Decrypt Message</h2>
+        <form action="/decrypt" method="POST" enctype="multipart/form-data" onsubmit="return validateDecryptForm()">
+            <label>Upload Encrypted Image:</label>
+            <input type="file" name="image" id="decryptImage" accept="image/png, image/jpeg" required>
+
+            <label>Enter Password:</label>
+            <input type="text" name="password" id="decryptPassword" required>
+
+            <button type="submit">Decrypt</button>
+        </form>
+    </div>
+
+    <script>
+        function validateEncryptForm() {
+            let password = document.getElementById("encryptPassword").value;
+            if (password.length !== 5 || !/^[A-Za-z0-9]+$/.test(password)) {
+                alert("❌ Password must be exactly 5 alphanumeric characters.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
