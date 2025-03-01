@@ -42,7 +42,7 @@
         function validateEncryptForm() {
             let password = document.getElementById("encryptPassword").value;
             if (password.length !== 5 || !/^[A-Za-z0-9]+$/.test(password)) {
-                alert("❌ Password must be exactly 5 alphanumeric characters.");
+                alert("Password must be exactly 5 alphanumeric characters.");
                 return false;
             }
             return true;
